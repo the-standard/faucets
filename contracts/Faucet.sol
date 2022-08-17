@@ -10,11 +10,11 @@ contract Faucet is ERC20, Ownable {
     uint public backoff;    // backoff - min time before minting again
     uint256 public max;     // max amount of tokens to mint
 
-    mapping(address => uint) private minters; 
+    mapping(address => uint) private minters;
 
     constructor(
-        string memory _name, 
-        string memory _symbol, 
+        string memory _name,
+        string memory _symbol,
         uint8 _decimals,
         uint _backoff,
         uint256 _max
@@ -23,7 +23,7 @@ contract Faucet is ERC20, Ownable {
         max = _max;
         backoff = _backoff;
     }
-	
+
     modifier backOff {
         uint then = minters[msg.sender];
         require((block.timestamp - then) > backoff, 'err-backoff');
@@ -49,6 +49,6 @@ contract Faucet is ERC20, Ownable {
     }
 
     function decimals() public view override returns (uint8) {
-		return dec;
-	}
+        return dec;
+    }
 }
